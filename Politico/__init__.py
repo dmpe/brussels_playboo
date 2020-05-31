@@ -17,24 +17,20 @@ def main(mytimer: func.TimerRequest) -> None:
 
     logging.info('Python timer trigger function ran at %s', utc_timestamp)
 
-    playbook_url = extract_main_playbook_url("https://www.politico.eu/newsletter/brussels-playbook/")
-
+    playbook_url = extract_url("https://www.politico.eu/newsletter/brussels-playbook/", ".front-list > li:nth-child(1) > article:nth-child(1) > div:nth-child(2) > article:nth-child(1) > div:nth-child(1) > header:nth-child(1) > h3:nth-child(1) > a:nth-child(1)", 'href')
+    audio_url = extract_url(playbook_url, "#amazon-polly-audio-play > source:nth-child(1)", "src")
 
 def extract_content(url) -> str:
     req = requests.get(url, headers = {"user-agent":"Azure Cloud @ GitHub"}).text
     return req
 
-def extract_main_playbook_url(url) -> str:
-    first_article_url_css_sel = ".front-list > li:nth-child(1) > article:nth-child(1) > div:nth-child(2) > article:nth-child(1) > div:nth-child(1) > header:nth-child(1) > h3:nth-child(1) > a:nth-child(1)"
+def extract_url(url, selector, attribute) -> str:
     soup = BeautifulSoup(extract_content(url), 'html.parser')
-    a_tag = soup.select(first_article_url_css_sel)[0]
-    newest_playbook_issue_url = a_tag.attrs['href']
-    return newest_playbook_issue_url
+    tag = soup.select(selector)[0]
+    url = tag.attrs[attribute]
+    return url
 
-def extract_playbooks_polly_recording() -> str:
-
-
-
+def next_playbook_url(url) -> str:
 
 
 
