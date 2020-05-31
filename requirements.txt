@@ -1,2 +1,4 @@
 azure-functions
 requests
+beautifulsoup4
+lxml
