@@ -24,9 +24,15 @@ def extract_url(url, selector, attribute) -> str:
     return url
 
 def send_us_playbook_url(url) -> str:
-    sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+    sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
     message = Mail(from_email=From(os.environ.get('OUTLOOK_EMAIL'), 'My Outlook email'),
-                    to_emails=To(os.environ.get('SEZNAM_EMAIL'), 'My seznam email'),
-                    subject=Subject('Politico Brussels Podcast URL Direct Link'),
-                    plain_text_content=PlainTextContent('Brussels Playbook Podcast: ' + url))
-
+            to_emails=To(os.environ.get('SEZNAM_EMAIL'), 'My seznam email'),
+            subject=Subject('Politico Brussels Podcast URL Direct Link'),
+            plain_text_content=PlainTextContent('Brussels Playbook Podcast: ' + url))
+    try:
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(e.message)
