@@ -1,0 +1,22 @@
+{
+  "rules": [
+    {
+      "name": "Remove-blobs",
+      "enabled": true,
+      "type": "Lifecycle",
+      "definition": {
+        "filters": {
+          "blobTypes": [ "blockBlob" ]
+        },
+        "actions": {
+          "baseBlob": {
+            "delete": { "daysAfterModificationGreaterThan": 5 }
+          },
+          "snapshot": {
+            "delete": { "daysAfterCreationGreaterThan": 5 }
+          }
+        }
+      }
+    }
+  ]
+}

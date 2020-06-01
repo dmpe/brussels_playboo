@@ -29,5 +29,4 @@ def send_us_playbook_url(url) -> str:
                     to_emails=To(os.environ.get('SEZNAM_EMAIL'), 'My seznam email'),
                     subject=Subject('Politico Brussels Podcast URL Direct Link'),
                     plain_text_content=PlainTextContent('Brussels Playbook Podcast: ' + url))
-# sendgrid key: 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
 

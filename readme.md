@@ -24,12 +24,21 @@ Requirements:
 
 ```shell
 az login
+az group create --location eastus --name azure-functions
+az storage account create -n dmpestorageaccount -g azure-functions --access-tier hot --https-only --kind StorageV2 --sku Standard_LRS --tags loc=eastus reason=func
+az storage account update --custom-domain "storage.melive.xyz"
+touch azure_blob_policy.json
+az storage account management-policy create --account-name dmpestorageaccount -g azure-functions --policy "$(cat azure_blob_policy.json)"
+# setup other alerting/monitoring rules as necessary
+
+az functionapp create -n politico-brussels -c eastus -g azure-functions -s dmpestorageaccount --disable-app-insights true --os-type linux --runtime python --runtime-version 3.8 (once available in the future) --tags reason=function
 
 ```
 
 
 ## Estimated Costs
 
+The goal was to also minimize costs as much as possible. Hence for example use of policies.
 
 ## Deployment
 
