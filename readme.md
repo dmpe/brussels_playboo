@@ -15,11 +15,11 @@ Requirements:
 - Azure Function CLI <https://github.com/Azure/azure-functions-core-tools>
 - Azure Storage resource
 - Azure Function resource - will be created using Az CLI
-
+- Sendgrid API key (free for 100 emails/day)
 
 1. Fork this repo
 2. In `__init__.py` adjust `send_us_playbook_url` parameters for your emails, and sendgrid api key.
-2.2. Generate Sendgrid key if you need it (you will if using sendgrid SaaS)
+2.2. Generate Sendgrid key if you need it (you will, if using sendgrid SaaS)
 3. Setup azure account
 
 ```shell
