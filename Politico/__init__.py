@@ -39,7 +39,7 @@ def extract_url(url, selector, attribute) -> str:
 def send_us_playbook_url(url_eu, url_uk) -> str:
     sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
 
-    msg = '''Brussels: {0} <br>
+    msg = '''Brussels: {0}
              London: {1}
             '''.format(url_eu, url_uk)
 
