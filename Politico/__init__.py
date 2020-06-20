@@ -19,6 +19,7 @@ def main(myReq: func.HttpRequest):
         # check for "london playbook PM"
         if "-pm-" not in playbook_url:
             audio_url_uk = extract_url(playbook_url, "#amazon-polly-audio-play > source:nth-child(1)", "src")
+            break
         else:
             pass
 
