@@ -7,15 +7,13 @@ from bs4 import BeautifulSoup
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import *
 
-
-
 def main(myReq: func.HttpRequest):
     playbook_url = extract_url("https://www.politico.eu/newsletter/brussels-playbook/", ".front-list > li:nth-child(1) > article:nth-child(1) > div:nth-child(2) > article:nth-child(1) > div:nth-child(1) > header:nth-child(1) > h3:nth-child(1) > a:nth-child(1)", 'href')
     audio_url_brussels = extract_url(playbook_url, "#amazon-polly-audio-play > source:nth-child(1)", "src")
 
     for i in range(1, 3):
         playbook_url = extract_url("https://www.politico.eu/newsletter/london-playbook/", ".front-list > li:nth-child("+str(i)+") > article:nth-child(1) > div:nth-child(2) > article:nth-child(1) > div:nth-child(1) > header:nth-child(1) > h3:nth-child(1) > a:nth-child(1)", 'href')
-        print(playbook_url)
+        # print(playbook_url)
         # check for "london playbook PM"
         if "-pm-" not in playbook_url:
             audio_url_uk = extract_url(playbook_url, "#amazon-polly-audio-play > source:nth-child(1)", "src")
@@ -24,7 +22,7 @@ def main(myReq: func.HttpRequest):
             pass
 
     send_us_playbook_url(audio_url_brussels, audio_url_uk)
-    logging.info('Python HTTP triggered function processed ok!')
+    # logging.info('Python HTTP triggered function processed ok!')
 
 def extract_content(url) -> str:
     req = requests.get(url, headers = {"user-agent":"Azure Cloud @ GitHub"}).text
@@ -49,8 +47,8 @@ def send_us_playbook_url(url_eu, url_uk) -> str:
             plain_text_content=PlainTextContent(msg))
     try:
         response = sg.send(message)
-        print(response.status_code)
-        print(response.body)
-        print(response.headers)
+        # print(response.status_code)
+        # print(response.body)
+        # print(response.headers)
     except Exception as e:
         print(e.message)
