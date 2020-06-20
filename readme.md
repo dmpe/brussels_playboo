@@ -1,10 +1,12 @@
-# Send a daily Brussels Playbook audio feed to your email
+# Send a daily Politico Playbooks' audio feed to your email
+
+[![Build Status](https://dev.azure.com/johnmalc/Politico-Newsletters/_apis/build/status/dmpe.politico_playbook?branchName=master)](https://dev.azure.com/johnmalc/Politico-Newsletters/_build/latest?definitionId=9&branchName=master)
 
 Some years ago, Politico.eu has decided to stop providing an audio feed of their Brussels Playbook to various podcasting apps.
-What they still provide is ML-and-AWS-powered Text-To-Speach translation (as of Q2/2020).
+What they still provide is ML-and-AWS-powered Text-To-Speech translation (as of Q2/2020).
 
-As a consequence, because of a large inconvenience, I wrote this `Azure Function` which extract the first article from <https://www.politico.eu/newsletter/brussels-playbook/> (aka the latest playbook), and then extracts Amazon Polly audio file from it.
-Then, it is being forwarded to my email account....on the demand, based on HTTP request to Azure function endpoint.
+As a consequence, because of a large inconvenience, I wrote this `Azure Function` which extract the first article from <https://www.politico.eu/newsletter/brussels-playbook/> and <https://www.politico.eu/newsletter/london-playbook/> (aka the latest playbook), and then extracts Amazon Polly audio files from them.
+Then, AWS audio feed URLs are being forwarded to my email account....on the demand, based on HTTP request to Azure function endpoint.
 
 ## How to setup it up for yourself?
 
@@ -46,7 +48,7 @@ According to my estimations, it should be 0.
 <https://docs.microsoft.com/en-us/azure/azure-functions/functions-deployment-technologies>
 
 ```
-# remote
+# remote (preffered)
 func azure functionapp publish <APP_NAME>
 
 # local

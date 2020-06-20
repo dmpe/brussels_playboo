@@ -41,14 +41,14 @@ stages:
     - task: UsePythonVersion@0
       displayName: 'Use Python 3.8'
       inputs:
-        versionSpec: 3.8 
+        versionSpec: 3.8
 
-    - bash: |
-        python -m venv worker_venv
-        source worker_venv/bin/activate
-        pip install -r requirements.txt
-      workingDirectory: $(workingDirectory)
-      displayName: 'Install application dependencies'
+    - script: pip3 install --upgrade pip setuptools wheel
+      displayName: "Install package tooling"
+
+    # fix for missing requests lib https://github.com/Azure/azure-functions-python-worker/issues/627
+    - script: pip3 install --target="$(workingDirectory)/.python_packages/lib/site-packages" -r requirenments.txt
+      displayName: "Install requirements"
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
