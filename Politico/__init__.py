@@ -14,7 +14,7 @@ def main(myReq: func.HttpRequest):
     audio_url_brussels = extract_url(playbook_url, "#amazon-polly-audio-play > source:nth-child(1)", "src")
 
     for i in range(1, 3):
-        playbook_url = extract_url("https://www.politico.eu/newsletter/london-playbook/", ".front-list > li:nth-child("+i+") > article:nth-child(1) > div:nth-child(2) > article:nth-child(1) > div:nth-child(1) > header:nth-child(1) > h3:nth-child(1) > a:nth-child(1)", 'href')
+        playbook_url = extract_url("https://www.politico.eu/newsletter/london-playbook/", ".front-list > li:nth-child("+str(i)+") > article:nth-child(1) > div:nth-child(2) > article:nth-child(1) > div:nth-child(1) > header:nth-child(1) > h3:nth-child(1) > a:nth-child(1)", 'href')
         print(playbook_url)
         # check for "london playbook PM"
         if "-pm-" not in playbook_url:
