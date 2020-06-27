@@ -61,7 +61,11 @@ stages:
 
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       artifact: drop
-
+    - task: WhiteSource Bolt@20
+      inputs:
+        cwd: '$(workingDirectory)'
+        advance: true
+        
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
